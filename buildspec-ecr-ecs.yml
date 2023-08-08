@@ -94,9 +94,9 @@ phases:
 #      - mv Dockerfile Dockerfile.jvm
 #      - cd ..
 #      - ls
-  post_build:
-    commands:
-      # Deploy to ECS
-      - aws ecs update-service --cluster quarkus --service event-statistics --force-new-deployment
+#  post_build:
+#    commands:
+#      # Deploy to ECS
+#      - aws ecs update-service --cluster quarkus --service event-statistics --force-new-deployment
 artifacts:
   files: []
