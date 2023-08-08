@@ -54,8 +54,8 @@ phases:
 #      - aws eks --region $AWS_REGION update-cluster-config --name sample-quarkus-microservices --oidc-issuer-url https://oidc.eks.ap-southeast-1.amazonaws.com/id/2F70C55F780702F1F4A8E77B872E3F4C
       - echo "Updating aws-auth ConfigMap"
       - kubectl get configmap aws-auth -n kube-system -o yaml > aws-auth.yaml
-      - echo "- rolearn: arn:aws:iam::576694912472:role/service-role/codebuild-sample-quarkus-microservices-service-role" >> aws-auth.yaml
-      - echo "  username: CodeBuild Role to Access EKS" >> aws-auth.yaml
+      - echo "rolearn:arn:aws:iam::576694912472:role/codebuild-sample-quarkus-microservices-service-role" >> aws-auth.yaml
+      - echo "username:CodeBuildRoleToAccessEKS" >> aws-auth.yaml
       - kubectl apply -f aws-auth.yaml
       - rm aws-auth.yaml
       - echo "Applying Kubernetes deployment"
