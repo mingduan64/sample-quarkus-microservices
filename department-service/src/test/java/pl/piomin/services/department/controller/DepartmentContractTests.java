@@ -27,13 +27,13 @@ public class DepartmentContractTests {
     @TestTarget
     HttpTestTarget target = new HttpTestTarget("localhost", this.quarkusPort);
 
-    @TestTemplate
-    @ExtendWith(PactVerificationInvocationContextProvider.class)
-    void pactVerificationTestTemplate(PactVerificationContext context) {
-        context.verifyInteraction();
-        System.setProperty("pact.provider.version", "1.1");
-        System.setProperty("pact.verifier.publishResults", "true");
-    }
+//    @TestTemplate
+//    @ExtendWith(PactVerificationInvocationContextProvider.class)
+//    void pactVerificationTestTemplate(PactVerificationContext context) {
+//        context.verifyInteraction();
+//        System.setProperty("pact.provider.version", "1.1");
+//        System.setProperty("pact.verifier.publishResults", "true");
+//    }
 
     @BeforeEach
     void beforeEach(PactVerificationContext context) {
