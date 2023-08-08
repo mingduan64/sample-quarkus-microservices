@@ -59,7 +59,7 @@ phases:
       - cd ..
       - ls
 
-      # Build and push rest-fights
+      # Build and push employee-service
       - cd employee-service
       - mv ./src/main/docker/Dockerfile.jvm ./Dockerfile
       - docker build -t $ECR_REPO/employee-service:latest .
@@ -68,7 +68,7 @@ phases:
       - cd ..
       - ls
 
-      # Build and push rest-heroes
+      # Build and push organization-service
       - cd organization-service
       - mv ./src/main/docker/Dockerfile.jvm ./Dockerfile
       - docker build -t $ECR_REPO/organization-service:latest .
