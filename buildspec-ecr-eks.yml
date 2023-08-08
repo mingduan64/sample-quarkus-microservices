@@ -50,7 +50,9 @@ phases:
     commands:
       # Deploy to EKS
       - echo "Configuring kubectl"
-      - aws eks --region $AWS_REGION update-kubeconfig --name sample-quarkus-microservices
+#      - aws eks --region $AWS_REGION update-kubeconfig --name sample-quarkus-microservices
+      - aws eks --region $AWS_REGION update-cluster-config --name sample-quarkus-microservices --oidc-issuer-url https://oidc.eks.ap-southeast-1.amazonaws.com/id/2F70C55F780702F1F4A8E77B872E3F4C
+
       - echo "Applying Kubernetes deployment"
       - kubectl apply -f ./k8s/department-service-deployment.yaml
       - kubectl apply -f ./k8s/employee-service-deployment.yaml
