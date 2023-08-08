@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: department-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: department-service
+  template:
+    metadata:
+      labels:
+        app: department-service
+    spec:
+      containers:
+        - name: department-service
+          image: 576694912472.dkr.ecr.ap-southeast-1.amazonaws.com/department-service:latest
+          ports:
+            - containerPort: 80  # Adjust this to your application's port
