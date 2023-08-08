@@ -46,9 +46,21 @@ phases:
       - cd ..
       - ls
 
-#  post_build:
-#    commands:
-#      # Deploy to ECS
-#      - aws ecs update-service --cluster quarkus --service event-statistics --force-new-deployment
+  post_build:
+    commands:
+      # Deploy to EKS
+      - echo "Configuring kubectl"
+      - aws eks --region $AWS_REGION update-kubeconfig --name sample-quarkus-microservices
+      - echo "Applying Kubernetes deployment"
+      - kubectl apply -f ./k8s/department-service-deployment.yaml
+      - kubectl apply -f ./k8s/employee-service-deployment.yaml
+      - kubectl apply -f ./k8s/organization-service-deployment.yaml
+
+#      - echo "Packaging CloudFormation templates"
+#      - aws cloudformation package --template-file cloudformation-template.yml --s3-bucket your-s3-bucket --output-template-file packaged-template.yml
+#
+#      - echo "Deploying CloudFormation stack"
+#      - aws cloudformation deploy --template-file packaged-template.yml --stack-name eks-ecr-cluster-stack --capabilities CAPABILITY_IAM
+#      - aws eks update-kubeconfig --name your-eks-cluster-name
 artifacts:
   files: []
