@@ -1,0 +1,12 @@
+# department-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: elb
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: organization-service
