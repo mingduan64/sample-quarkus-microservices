@@ -52,6 +52,7 @@ phases:
       - echo "Configuring kubectl"
       - aws eks --region $AWS_REGION update-kubeconfig --name my-eks-cluster
       - aws sts get-caller-identity
+      - eksctl --version
 #      - aws eks --region $AWS_REGION update-cluster-config --name sample-quarkus-microservices --oidc-issuer-url https://oidc.eks.ap-southeast-1.amazonaws.com/id/2F70C55F780702F1F4A8E77B872E3F4C
       - echo "Updating aws-auth ConfigMap"
       - kubectl get configmap aws-auth -n kube-system -o yaml > aws-auth.yaml
