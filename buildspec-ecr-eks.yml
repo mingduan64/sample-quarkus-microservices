@@ -67,6 +67,9 @@ phases:
       - kubectl apply -f ./k8s/department-service-deployment.yaml
       - kubectl apply -f ./k8s/employee-service-deployment.yaml
       - kubectl apply -f ./k8s/organization-service-deployment.yaml
+      - kubectl apply -f ./k8s/department-service.yaml
+      - kubectl apply -f ./k8s/employee-service.yaml
+      - kubectl apply -f ./k8s/organization-service.yaml
       - kubectl get deploy
       - kubectl get svc
       - kubectl get po
