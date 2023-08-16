@@ -11,40 +11,40 @@ phases:
       - docker --version
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO
 
-  build:
-    commands:
-      - ls
-      - mvn clean install -DskipTests
-
-      # Build and push department-service
-      - cd department-service
-      - ls
-      - mv ./src/main/docker/Dockerfile.jvm ./Dockerfile
-      - ls
-      - docker --help
-      - docker build -t $ECR_REPO/department-service:latest .
-      - docker push "$ECR_REPO/department-service:latest"
-      - mv Dockerfile Dockerfile.jvm
-      - cd ..
-      - ls
-
-      # Build and push employee-service
-      - cd employee-service
-      - mv ./src/main/docker/Dockerfile.jvm ./Dockerfile
-      - docker build -t $ECR_REPO/employee-service:latest .
-      - docker push "$ECR_REPO/employee-service:latest"
-      - mv Dockerfile Dockerfile.jvm
-      - cd ..
-      - ls
-
-      # Build and push organization-service
-      - cd organization-service
-      - mv ./src/main/docker/Dockerfile.jvm ./Dockerfile
-      - docker build -t $ECR_REPO/organization-service:latest .
-      - docker push "$ECR_REPO/organization-service:latest"
-      - mv Dockerfile Dockerfile.jvm
-      - cd ..
-      - ls
+#  build:
+#    commands:
+#      - ls
+#      - mvn clean install -DskipTests
+#
+#      # Build and push department-service
+#      - cd department-service
+#      - ls
+#      - mv ./src/main/docker/Dockerfile.jvm ./Dockerfile
+#      - ls
+#      - docker --help
+#      - docker build -t $ECR_REPO/department-service:latest .
+#      - docker push "$ECR_REPO/department-service:latest"
+#      - mv Dockerfile Dockerfile.jvm
+#      - cd ..
+#      - ls
+#
+#      # Build and push employee-service
+#      - cd employee-service
+#      - mv ./src/main/docker/Dockerfile.jvm ./Dockerfile
+#      - docker build -t $ECR_REPO/employee-service:latest .
+#      - docker push "$ECR_REPO/employee-service:latest"
+#      - mv Dockerfile Dockerfile.jvm
+#      - cd ..
+#      - ls
+#
+#      # Build and push organization-service
+#      - cd organization-service
+#      - mv ./src/main/docker/Dockerfile.jvm ./Dockerfile
+#      - docker build -t $ECR_REPO/organization-service:latest .
+#      - docker push "$ECR_REPO/organization-service:latest"
+#      - mv Dockerfile Dockerfile.jvm
+#      - cd ..
+#      - ls
 
   post_build:
     commands:
@@ -52,7 +52,7 @@ phases:
       - echo "Configuring kubectl"
 
       - eksctl version
-      - eksctl create cluster --name sample-quarkus-microservices --region ap-southeast-1 --nodegroup-name standard-workers --node-type t2.micro --fargate
+#      - eksctl create cluster --name sample-quarkus-microservices --region ap-southeast-1 --nodegroup-name standard-workers --node-type t2.micro --fargate
       - aws eks --region $AWS_REGION update-kubeconfig --name sample-quarkus-microservices
       - aws sts get-caller-identity
       #      - aws eks --region $AWS_REGION update-cluster-config --name sample-quarkus-microservices --oidc-issuer-url https://oidc.eks.ap-southeast-1.amazonaws.com/id/2F70C55F780702F1F4A8E77B872E3F4C
@@ -64,10 +64,10 @@ phases:
 #      - rm aws-auth.yaml
       - echo "Applying Kubernetes deployment"
       - kubectl version
-      - kubectl apply -f ./k8s/department-service-deployment.yaml
+#      - kubectl apply -f ./k8s/department-service-deployment.yaml
 #      - kubectl apply -f ./k8s/employee-service-deployment.yaml
 #      - kubectl apply -f ./k8s/organization-service-deployment.yaml
-      - kubectl apply -f ./k8s/department-service.yaml
+#      - kubectl apply -f ./k8s/department-service.yaml
 #      - kubectl apply -f ./k8s/employee-service.yaml
 #      - kubectl apply -f ./k8s/organization-service.yaml
       - kubectl get services
