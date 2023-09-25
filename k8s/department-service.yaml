@@ -1,12 +1,17 @@
-# department-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: elb
+  name: department-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
+
 spec:
-  type: LoadBalancer
-  ports:
-    - port: 80
-      targetPort: 8080
   selector:
     app: department-service
+  ports:
+    - protocol: TCP
+      port: 8080  # Port you want to expose externally
+      targetPort: 8080  # Port your application is listening on within the pods
+  type: LoadBalancer

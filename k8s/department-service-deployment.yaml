@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: department-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: department-service
@@ -16,4 +16,5 @@ spec:
         - name: department-service
           image: 576694912472.dkr.ecr.ap-southeast-1.amazonaws.com/department-service:latest
           ports:
-            - containerPort: 80  # Adjust this to your application's port
+            - containerPort: 8080  # Adjust this to your application's port
+      networkMode: awsvpc
